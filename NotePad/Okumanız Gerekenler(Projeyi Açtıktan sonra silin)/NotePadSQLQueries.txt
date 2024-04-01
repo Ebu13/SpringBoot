@@ -1,0 +1,21 @@
+CREATE TABLE NotePad (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    description TEXT,
+    text TEXT
+);
+INSERT INTO NotePad (name, description, text) 
+VALUES 
+    ('Toplantı Notları', 'Ekip toplantısındaki konu başlıkları', 'Proje zaman çizelgesi ve teslimatlar tartışıldı. Görevler ekibin üyelerine atanmıştır.'),
+    ('Alışveriş Listesi', 'Haftalık alışveriş için gerekenler listesi', 'Süt, yumurta, ekmek, tavuk, ıspanak, domates, patates, yoğurt, peynir'),
+    ('Blog Yazısı Fikirleri', 'Yaklaşan blog yazıları için fikirler', '1. En İyi 10 Üretkenlik Aracı\n2. Zaman Yönetimini Nasıl Başarılı Hale Getiririz?\n3. Yatırım Yapmaya Yeni Başlayanlar İçin Kılavuz'),
+    ('Kitap Önerileri', 'Okunacak kitaplar listesi', '1. "Sapiens: Kısa Bir İnsanlık Tarihi" - Yuval Noah Harari\n2. "Alışkanlığın Gücü" - Charles Duhigg\n3. "Düşünme, Hızlı ve Yavaş" - Daniel Kahneman'),
+    ('Ev İyileştirme Fikirleri', 'Mutfak tadilatı için planlar', '1. Yeni tezgah üstleri kurulumu\n2. Dolapları boyama\n3. Beyaz eşyaları yükseltme'),
+    ('Hediye Fikirleri', 'Arkadaşın doğum günü için hediye fikirleri', '1. Kişiye özel fotoğraf albümü\n2. Yemek yapma kursu deneyimi\n3. Kitapçı hediye kartı'),
+    ('Finansal Hedefler', 'Tasarruf etme ve yatırım yapma hedefleri', '1. Acil durum fonu oluşturma\n2. 401(k) katkılarını maksimuma çıkarma\n3. Roth IRA açma'),
+    ('Film İzleme Listesi', 'İzlenmesi gereken filmlerin listesi', '1. Esaretin Bedeli\n2. Başlangıç\n3. Forrest Gump'),
+    ('Bahçe Planları', 'Sebzeliğe dikilecek bitkiler için planlar', '1. Domates\n2. Biber\n3. Havuç\n4. Marul'),
+    ('Kendin Yap Projeleri', 'Hafta sonu Kendin Yap projeleri için fikirler', '1. Arka bahçede ateş çukuru inşa etme\n2. Yükseltilmiş bahçe yatağı oluşturma\n3. Eski mobilyaları cilalama'),
+    ('Sağlık Hedefleri', 'Kişisel sağlık ve wellness hedefleri', '1. Daha fazla su içme\n2. Gece başına 8 saat uyuma\n3. Şeker tüketimini azaltma'),
+    ('Müzik Çalma Listesi', 'Rahatlama ve gevşeme için çalma listesi', '1. Klasik müzik\n2. Caz\n3. Ambiyans elektronik'),
+    ('Kariyer Gelişimi', 'Kariyerde ilerlemek için hedefler', '1. Profesyonel sertifika almak\n2. Endüstri konferanslarına katılmak\n3. Profesyonellerle ağ kurmak');
