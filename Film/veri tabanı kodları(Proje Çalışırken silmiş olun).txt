@@ -1,0 +1,15 @@
+CREATE TABLE films (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    description TEXT,
+    text TEXT,
+    tur VARCHAR(50),
+    duration INTEGER,
+    year INTEGER
+);
+
+INSERT INTO films (name, description, text, tur, duration, year)
+VALUES
+('Inception', 'A thief who enters the dreams of others to steal secrets from their subconscious.', 'Director: Christopher Nolan', 'Sci-Fi', 148, 2010),
+('The Shawshank Redemption', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'Director: Frank Darabont', 'Drama', 142, 1994),
+('The Godfather', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'Director: Francis Ford Coppola', 'Crime', 175, 1972);
