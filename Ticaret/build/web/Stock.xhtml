@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Stock Management</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    </h:head>
+
+    <h:body class="container">
+        <h1>Stock Management</h1>
+
+        <!-- Add Stock Form -->
+        <h:form id="stockAddForm" class="mb-4">
+            <h2>Add Stock</h2>
+            <div class="form-group">
+                <h:outputLabel for="addProductId">Product ID:</h:outputLabel>
+                <h:inputText id="addProductId" value="#{stockController.newStock.productId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addQuantity">Quantity:</h:outputLabel>
+                <h:inputText id="addQuantity" value="#{stockController.newStock.quantity}" required="true" class="form-control"/>
+            </div>
+            <h:commandButton value="Add" action="#{stockController.addStock}" class="btn btn-primary"/>
+        </h:form>
+
+        <!-- Stock List -->
+        <h2>Stocks</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Stock ID</th>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                        <th>Last Update</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat value="#{stockController.stocks}" var="stock">
+                        <tr>
+                            <td>#{stock.stockId}</td>
+                            <td>#{stock.productId}</td>
+                            <td>#{stock.quantity}</td>
+                            <td>#{stock.lastUpdate}</td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton value="Edit" action="#{stockController.editStock(stock)}" class="btn btn-warning">
+                                        <f:setPropertyActionListener target="#{stockController.selectedStock}" value="#{stock}" />
+                                    </h:commandButton>
+                                </h:form>
+                            </td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton value="Delete" action="#{stockController.deleteStock(stock.stockId)}" onclick="return confirm('Are you sure?')" class="btn btn-danger"/>
+                                </h:form>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Form -->
+        <h:form id="stockEditForm" rendered="#{not empty stockController.selectedStock}">
+            <h2>Edit Stock</h2>
+            <div class="form-group">
+                <h:outputLabel for="editProductId">Product ID:</h:outputLabel>
+                <h:inputText id="editProductId" value="#{stockController.selectedStock.productId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editQuantity">Quantity:</h:outputLabel>
+                <h:inputText id="editQuantity" value="#{stockController.selectedStock.quantity}" required="true" class="form-control"/>
+            </div>
+            <h:commandButton value="Update" action="#{stockController.updateStock}" class="btn btn-success"/>
+        </h:form>
+
+        <!-- Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:form>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Product Category Mapping" actionListener="#{navigationController.navigateToPage('ProductCategoryMapping.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Product Category" actionListener="#{navigationController.navigateToPage('ProductCategory.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Product" actionListener="#{navigationController.navigateToPage('Product.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Order Detail" actionListener="#{navigationController.navigateToPage('OrderDetail.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Order" actionListener="#{navigationController.navigateToPage('Order.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Message" actionListener="#{navigationController.navigateToPage('Message.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Return And Cancellation Request" actionListener="#{navigationController.navigateToPage('ReturnAndCancellationRequest.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Review" actionListener="#{navigationController.navigateToPage('Review.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="User" actionListener="#{navigationController.navigateToPage('User.xhtml')}" immediate="true"/>
+            </li>
+            <li class="nav-item">
+                <h:commandLink styleClass="nav-link" value="Stock" actionListener="#{navigationController.navigateToPage('Stock.xhtml')}" immediate="true"/>
+            </li>
+        </ul>
+    </h:form>
+
+</ui:composition>

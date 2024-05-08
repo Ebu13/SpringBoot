@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>İade ve İptal Talepleri Yönetimi</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    </h:head>
+
+    <h:body class="container">
+        <h1>İade ve İptal Talepleri Yönetimi</h1>
+
+        <!-- Talep Ekleme Formu -->
+        <h:form id="requestAddForm" class="mb-4">
+            <h2>Talep Ekle</h2>
+            <div class="form-group">
+                <h:outputLabel for="addOrderId">Sipariş ID:</h:outputLabel>
+                <h:inputText id="addOrderId" value="#{returnAndCancellationRequestController.newRequest.orderId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addUserId">Kullanıcı ID:</h:outputLabel>
+                <h:inputText id="addUserId" value="#{returnAndCancellationRequestController.newRequest.userId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addRequestType">Talep Türü:</h:outputLabel>
+                <h:selectOneMenu id="addRequestType" value="#{returnAndCancellationRequestController.newRequest.requestType}" class="form-control">
+                    <f:selectItem itemValue="Return" itemLabel="İade"/>
+                    <f:selectItem itemValue="Cancellation" itemLabel="İptal"/>
+                </h:selectOneMenu>
+            </div>
+            <h:commandButton value="Ekle" action="#{returnAndCancellationRequestController.addRequest}" class="btn btn-primary"/>
+        </h:form>
+
+        <!-- Talep Listesi -->
+        <h2>Talepler</h2>
+        <ui:repeat value="#{returnAndCancellationRequestController.requests}" var="req">
+            <h:form id="requestForm_#{req.requestId}">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Talep ID</th>
+                            <th>Sipariş ID</th>
+                            <th>Kullanıcı ID</th>
+                            <th>Talep Tarihi</th>
+                            <th>Talep Türü</th>
+                            <th>Durum</th>
+                            <th>Düzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                        <tr>
+                            <td>#{req.requestId}</td>
+                            <td>#{req.orderId}</td>
+                            <td>#{req.userId}</td>
+                            <td>#{req.requestDate}</td>
+                            <td>#{req.requestType}</td>
+                            <td>#{req.status}</td>
+                            <td>
+                                <h:commandButton value="Düzenle" action="#{returnAndCancellationRequestController.editRequest(req)}" class="btn btn-warning"/>
+                            </td>
+                            <td>
+                                <h:commandButton value="Sil" action="#{returnAndCancellationRequestController.deleteRequest(req.requestId)}" onclick="return confirm('Emin misiniz?')" class="btn btn-danger"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:form>
+        </ui:repeat>
+
+        <!-- Talep Düzenleme Formu -->
+        <h:form id="requestEditForm" rendered="#{not empty returnAndCancellationRequestController.selectedRequest}">
+            <h2>Talep Düzenle</h2>
+            <div class="form-group">
+                <h:outputLabel for="editOrderId">Sipariş ID:</h:outputLabel>
+                <h:inputText id="editOrderId" value="#{returnAndCancellationRequestController.selectedRequest.orderId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editUserId">Kullanıcı ID:</h:outputLabel>
+                <h:inputText id="editUserId" value="#{returnAndCancellationRequestController.selectedRequest.userId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editRequestType">Talep Türü:</h:outputLabel>
+                <h:selectOneMenu id="editRequestType" value="#{returnAndCancellationRequestController.selectedRequest.requestType}" class="form-control">
+                    <f:selectItem itemValue="Return" itemLabel="İade"/>
+                    <f:selectItem itemValue="Cancellation" itemLabel="İptal"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editStatus">Durum:</h:outputLabel>
+                <h:selectOneMenu id="editStatus" value="#{returnAndCancellationRequestController.selectedRequest.status}" class="form-control">
+                    <f:selectItem itemValue="Pending" itemLabel="Beklemede"/>
+                    <f:selectItem itemValue="Approved" itemLabel="Onaylandı"/>
+                    <f:selectItem itemValue="Rejected" itemLabel="Reddedildi"/>
+                </h:selectOneMenu>
+            </div>
+            <h:commandButton value="Güncelle" action="#{returnAndCancellationRequestController.updateRequest}" class="btn btn-success"/>
+        </h:form>
+
+        <!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

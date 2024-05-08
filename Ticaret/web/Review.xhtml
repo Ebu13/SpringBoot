@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Review Management</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    </h:head>
+
+    <h:body class="container">
+        <h1>Review Management</h1>
+
+        <!-- Add Review Form -->
+        <h:form id="reviewAddForm" class="mb-4">
+            <h2>Add Review</h2>
+            <div class="form-group">
+                <h:outputLabel for="addUserId">User ID:</h:outputLabel>
+                <h:inputText id="addUserId" value="#{reviewController.newReview.userId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addProductId">Product ID:</h:outputLabel>
+                <h:inputText id="addProductId" value="#{reviewController.newReview.productId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addRating">Rating:</h:outputLabel>
+                <h:inputText id="addRating" value="#{reviewController.newReview.rating}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addComment">Comment:</h:outputLabel>
+                <h:inputTextarea id="addComment" value="#{reviewController.newReview.comment}" required="true" class="form-control"/>
+            </div>
+            <h:commandButton value="Add" action="#{reviewController.addReview}" class="btn btn-primary"/>
+        </h:form>
+
+        <!-- Review List -->
+        <h2>Reviews</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Review ID</th>
+                        <th>User ID</th>
+                        <th>Product ID</th>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                        <th>Review Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat value="#{reviewController.reviews}" var="review">
+                        <tr>
+                            <td>#{review.reviewId}</td>
+                            <td>#{review.userId}</td>
+                            <td>#{review.productId}</td>
+                            <td>#{review.rating}</td>
+                            <td>#{review.comment}</td>
+                            <td>#{review.reviewDate}</td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton value="Edit" action="#{reviewController.editReview(review)}" class="btn btn-warning">
+                                        <f:setPropertyActionListener target="#{reviewController.selectedReview}" value="#{review}" />
+                                    </h:commandButton>
+                                </h:form>
+                            </td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton value="Delete" action="#{reviewController.deleteReview(review.reviewId)}" onclick="return confirm('Are you sure?')" class="btn btn-danger"/>
+                                </h:form>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Form -->
+        <h:form id="reviewEditForm" rendered="#{not empty reviewController.selectedReview}">
+            <h2>Edit Review</h2>
+            <div class="form-group">
+                <h:outputLabel for="editUserId">User ID:</h:outputLabel>
+                <h:inputText id="editUserId" value="#{reviewController.selectedReview.userId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editProductId">Product ID:</h:outputLabel>
+                <h:inputText id="editProductId" value="#{reviewController.selectedReview.productId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editRating">Rating:</h:outputLabel>
+                <h:inputText id="editRating" value="#{reviewController.selectedReview.rating}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editComment">Comment:</h:outputLabel>
+                <h:inputTextarea id="editComment" value="#{reviewController.selectedReview.comment}" required="true" class="form-control"/>
+            </div>
+            <h:commandButton value="Update" action="#{reviewController.updateReview}" class="btn btn-success"/>
+        </h:form>
+
+        <!-- Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

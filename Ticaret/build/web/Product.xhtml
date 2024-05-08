@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Product Management</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    </h:head>
+
+    <h:body class="container">
+        <h1>Product Management</h1>
+
+        <!-- Add Product Form -->
+        <h:form id="productAddForm" class="mb-4">
+            <h2>Add Product</h2>
+            <!-- Kullanıcı seçimini yapmak için -->
+            <div class="form-group">
+                <h:outputLabel for="addUserId">User ID:</h:outputLabel>
+                <h:inputText id="addUserId" value="#{productController.newProduct.userId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addProductName">Product Name:</h:outputLabel>
+                <h:inputText id="addProductName" value="#{productController.newProduct.productName}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addDescription">Description:</h:outputLabel>
+                <h:inputTextarea id="addDescription" value="#{productController.newProduct.description}" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="addPrice">Price:</h:outputLabel>
+                <h:inputText id="addPrice" value="#{productController.newProduct.price}" required="true" class="form-control"/>
+            </div>
+            <h:commandButton value="Add" action="#{productController.addProduct}" class="btn btn-primary"/>
+        </h:form>
+
+        <!-- Product List -->
+        <h2>Products</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>User ID</th>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Creation Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat value="#{productController.products}" var="product">
+                        <tr>
+                            <td>#{product.productId}</td>
+                            <td>#{product.userId}</td>
+                            <td>#{product.productName}</td>
+                            <td>#{product.description}</td>
+                            <td>#{product.price}</td>
+                            <td>#{product.creationDate}</td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton value="Edit" action="#{productController.editProduct(product)}" class="btn btn-warning">
+                                        <f:setPropertyActionListener target="#{productController.selectedProduct}" value="#{product}" />
+                                    </h:commandButton>
+                                </h:form>
+                            </td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton value="Delete" action="#{productController.deleteProduct(product.productId)}" onclick="return confirm('Are you sure?')" class="btn btn-danger"/>
+                                </h:form>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Form -->
+        <h:form id="productEditForm" rendered="#{not empty productController.selectedProduct}">
+            <h2>Edit Product</h2>
+            <!-- Kullanıcı seçimini yapmak için -->
+            <div class="form-group">
+                <h:outputLabel for="editUserId">User ID:</h:outputLabel>
+                <h:inputText id="editUserId" value="#{productController.selectedProduct.userId}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editProductName">Product Name:</h:outputLabel>
+                <h:inputText id="editProductName" value="#{productController.selectedProduct.productName}" required="true" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editDescription">Description:</h:outputLabel>
+                <h:inputTextarea id="editDescription" value="#{productController.selectedProduct.description}" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="editPrice">Price:</h:outputLabel>
+                <h:inputText id="editPrice" value="#{productController.selectedProduct.price}" required="true" class="form-control"/>
+            </div>
+            <h:commandButton value="Update" action="#{productController.updateProduct}" class="btn btn-success"/>
+        </h:form>
+
+        <!-- Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
