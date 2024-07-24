@@ -1,9 +1,0 @@
-DBConnction sınıfını kendinize göre yapılandırın.
-
-
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/NotePad";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "13042003";
-
-Satırlarındaki DB_PASSWORD şifre kısmını kendi şifrenizle değiştirin.
-DB_URL değişkenindeki NotePad kısmını kendi veritabanınızla değiştirin
